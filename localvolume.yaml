@@ -1,0 +1,15 @@
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  name: my-local-volume
+  namespace: openshift-local-storage
+spec:
+  logLevel: Normal
+  managementState: Managed
+  storageClassDevices:
+  - storageClassName: my-local-volume
+    forceWipeDevicesAndDestroyAllData: true
+    volumeMode: Block Filesystem
+    devicePaths:
+    - /dev/vda
+    - /dev/vdb

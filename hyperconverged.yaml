@@ -1,0 +1,52 @@
+apiVersion: hco.kubevirt.io/v1beta1
+kind: HyperConverged
+metadata:
+  name: kubevirt-hyperconverged
+  namespace: openshift-cnv
+spec:
+  dataImportCronTemplates:
+  - metadata:
+      annotations:
+        cdi.kubevirt.io/storage.bind.immediate.requested: "true"
+      labels:
+        kubevirt.io/dynamic-credentials-support: "true"
+      name: centos-stream9-image-cron # replace with desired value
+    spec:
+      managedDataSource: centos-stream9 
+      template:
+        spec:
+          source:
+            registry:
+              pullMethod: node
+              url: docker://quay.io/containerdisks/centos-stream:9
+          storage:
+            storageClassName: my-local-volume
+            resources:
+              requests:
+                storage: 30Gi
+      schedule: "* * 31 10 *" # replace with your date  
+      managedDataSource: centos-stream9
+  enableCommonBootImageImport: false
+  
+
+#metadata:
+#  annotations:
+#    cdi.kubevirt.io/storage.bind.immediate.requested: "true"
+#  labels:
+#    kubevirt.io/dynamic-credentials-support: "true"
+#  name: centos-stream9-image-cron
+#spec:
+#  garbageCollect: Outdated
+#  managedDataSource: centos-stream9 
+#  schedule: 44 10/12 * * *
+#  template:
+#    metadata: {}
+#    spec:
+#      source:
+#        registry:
+#          pullMethod: node
+#          url: docker://quay.io/containerdisks/centos-stream:9
+#      storage:
+#        resources:
+#          requests:
+#            storage: 30Gi
