@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.io/ip-allocated-from-pool: metallb
+  creationTimestamp: "2025-11-07T12:32:33Z"
+  name: lbsvc
+  namespace: clusters-myhcp
+  resourceVersion: "4083611"
+  uid: ff35ad88-91bd-4b32-9ff8-15f7b206b0f5
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 172.30.240.244
+  clusterIPs:
+  - 172.30.240.244
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: httpd
+    nodePort: 31558
+    port: 6183
+    protocol: TCP
+    targetPort: 6183
+  - name: http
+    nodePort: 32078
+    port: 6180
+    protocol: TCP
+    targetPort: 6180
+  - name: ironic
+    nodePort: 30867
+    port: 6385
+    protocol: TCP
+    targetPort: 6385
+  selector:
+    vm.kubevirt.io/name: myhcp-cfht7-5c9js
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.111.129
+      ipMode: VIP
