@@ -4,18 +4,19 @@ metadata:
   name: lbsvc
 spec:
   type: LoadBalancer
+  allocateLoadBalancerNodePorts: false
   ports:
   - name: http
     protocol: TCP
     port: 6180
-    targetPort: 6180
+    targetPort: 30701
   - name: httpd
     protocol: TCP
     port: 6183
-    targetPort: 6183
+    targetPort: 30702  
   - name: ironic
     protocol: TCP
     port: 6385
-    targetPort: 6385
+    targetPort: 30703
   selector:
-    hyperhshift.openshift.io/nodepool-name: myhcp
+    hypershift.openshift.io/nodepool-name: myhcp

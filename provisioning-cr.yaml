@@ -3,5 +3,6 @@ kind: Provisioning
 metadata:
   name: provisioning-configuration
 spec:
-  externalIP: 192.168.111.129
+  externalIPs:
+  - 192.168.111.129
   provisioningNetwork: Disabled
