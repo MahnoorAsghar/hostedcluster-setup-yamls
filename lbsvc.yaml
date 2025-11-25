@@ -18,4 +18,4 @@ spec:
     port: 6385
     targetPort: 6385
   selector:
-    hyperhshift.openshift.io/nodepool-name: myhcp
+    hypershift.openshift.io/nodepool-name: myhcp
